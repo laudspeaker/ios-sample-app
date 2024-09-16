@@ -33,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
-
+    
+    //set up apns the first time
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNS Token: \(deviceToken.map { String(format: "%02.2hhx", $0) }.joined())")
@@ -45,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // Implement the delegate method to handle the FCM token refresh
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("FCM Registration Token: \(String(describing: fcmToken))")
-        self.laudspeakerManager.laudspeaker.sendFCMToken(fcmToken: fcmToken)
+        self.laudspeakerManager.laudspeaker.setFcmToken(token: fcmToken!)
+        //self.laudspeakerManager.laudspeaker.sendFCMToken(fcmToken: fcmToken)
 
         print("about to connect")
         print("3 didReceiveRegistrationToken")
